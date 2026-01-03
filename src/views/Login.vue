@@ -86,6 +86,7 @@
 
           const res = await backend.post("/api/login", { userEmail: this.email, userPassword: this.password })
           console.log(res.status);
+          console.log('backend Url: ' + import.meta.env.VITE_BACKEND_URL);
 
           // commit user email, list of foods with total impact / kg and set logged in to true in store
           store.commit("SET_USER_EMAIL", res.data.userEmail);
