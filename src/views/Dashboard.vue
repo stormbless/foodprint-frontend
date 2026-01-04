@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Environmental Impact Dashboard</h1>
-    <FilterForm :getData="getDashboardData" />
+    <FilterForm :onValidSubmit="loadDashboardData" />
 
     <v-card v-if="impactSummary.grades.overallGrade !== ''" class="pa-0" tile outlined>
       
@@ -59,6 +59,12 @@
   import FoodBreakdown from "@/components/FoodBreakdown.vue";
   import SubAnalysis from "@/components/SubAnalysis.vue";
   import ImpactOverTime from "@/components/ImpactOverTime.vue";
+
+  interface DashboardData { 
+    impactSummary: ImpactSummary, 
+    foodImpacts: FoodImpact[], 
+    impactOverTime: DateImpact[] 
+  }
 
   interface ImpactSummary {
     totalImpact: Impact,
@@ -150,22 +156,23 @@
     mounted() {},
     
     methods: {
-      async getDashboardData(startDate: string, endDate: string): Promise<void> {
+      async loadDashboardData(startDate: string, endDate: string): Promise<void> {
         this.$toast.open({
           message: "Loading...",
           type: "info",
           position: "bottom",
         });
         try {
-          this.impactSummary = await this.getImpactSummary(startDate, endDate);
+          const dashboardData = await this.getDashboardData(startDate, endDate);
+          this.impactSummary = dashboardData.impactSummary;
 
-          const foodImpacts: FoodImpact[] = await this.getFoodImpacts(startDate, endDate);
+          const foodImpacts = dashboardData.foodImpacts;
           this.setFoodImpacts(foodImpacts);
           this.setFoodImpactsPercentage(foodImpacts);
           this.setFoodImpactsPerKg(foodImpacts, store.state.foods);
           this.setSubBarMultiplier(this.foodImpacts);
 
-          const impactOverTime = await this.getImpactOverTime(startDate, endDate);
+          const impactOverTime = dashboardData.impactOverTime;
           this.resetOverTimeData();
           this.setImpactOverTime(impactOverTime);
           this.numberOfDays = impactOverTime.length;
@@ -189,8 +196,8 @@
         }
       },
 
-      async getImpactSummary(startDate: string, endDate: string): Promise<ImpactSummary> {
-        const res = await backend.get("/api/impact-summary", { 
+      async getDashboardData(startDate: string, endDate: string): Promise<DashboardData> {
+        const res = await backend.get("/api/dashboard-data", { 
           userEmail: store.state.userEmail, 
           startDate: startDate, 
           endDate: endDate 
@@ -199,18 +206,7 @@
 
         if (res.status === 204) { throw Error('No Entries Available') }
 
-        return res.data as ImpactSummary;
-      },
-
-      async getFoodImpacts(startDate: string, endDate: string): Promise<FoodImpact[]> {
-        const res = await backend.get("/api/food-impacts", { 
-          userEmail: store.state.userEmail, 
-          startDate: startDate, 
-          endDate: endDate 
-        })
-        console.log(res.status);
-
-        return res.data as FoodImpact[];
+        return res.data as DashboardData;
       },
 
       setFoodImpacts(foodImpacts: FoodImpact[]): void {
@@ -259,17 +255,6 @@
             eutrophicationPerKg: +(foodImpact.eutrophicationPerKg).toFixed(2),
             totalImpactPerKg: +(totalImpactPercentage).toFixed(1) };
         });
-      },
-
-      async getImpactOverTime(startDate: string, endDate: string): Promise<DateImpact[]> {
-        const res = await backend.get("/api/impact-over-time", { 
-          userEmail: store.state.userEmail, 
-          startDate: startDate, 
-          endDate: endDate 
-        })
-        console.log(res.status);
-
-        return res.data as DateImpact[];
       },
 
       setSubBarMultiplier(foodImpacts: FoodImpact[]): void {

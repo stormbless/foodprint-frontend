@@ -42,15 +42,15 @@
   import type { PropType } from "vue";
   import { defineComponent } from "vue"
 
-  type GetData = (startDate: string, endDate: string) => any;
+  type onValidSubmit = (startDate: string, endDate: string) => any;
 
   export default defineComponent({
     components: {},
 
-    // getData is a method passed to form that is called after the form is submitted
+    // onValidSubmit is a method passed to form that is called after the form is submitted and validated to be valid
     props: {
-      getData: { 
-        type: Function as PropType<GetData>, 
+      onValidSubmit: { 
+        type: Function as PropType<onValidSubmit>, 
         required: true 
       },
     },
@@ -94,7 +94,7 @@
         filterForm.validate();
 
         if (filterForm.isValid) {
-          this.getData(this.startDate, this.endDate);
+          this.onValidSubmit(this.startDate, this.endDate);
         }
       },
       
