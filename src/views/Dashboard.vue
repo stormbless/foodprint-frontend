@@ -168,7 +168,7 @@
           const impactOverTime = await this.getImpactOverTime(startDate, endDate);
           this.resetOverTimeData();
           this.setImpactOverTime(impactOverTime);
-          this.numberOfDays = impactOverTime.length - 1;
+          this.numberOfDays = impactOverTime.length;
 
           this.$toast.clear();
         } catch (err: unknown) {
