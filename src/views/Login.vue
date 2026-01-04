@@ -84,7 +84,9 @@
             position: "bottom",
           });
 
+          console.time("login");
           const res = await backend.post("/api/login", { userEmail: this.email, userPassword: this.password })
+          console.timeEnd("login");
           console.log(res.status);
           console.log('backend Url: ' + import.meta.env.VITE_BACKEND_URL);
 
