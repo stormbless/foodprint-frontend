@@ -21,8 +21,6 @@ const backend = {
       config.data = params;
     }
     
-    console.log(JSON.stringify(config));
-    
     return await axios(config);
   },
   refreshAccessToken: async () => {
