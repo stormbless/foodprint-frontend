@@ -33,17 +33,8 @@
 
 <style scoped>
   .main {
-    /* background-color: rgba(234, 245, 246, 0.642); */
-    background: linear-gradient(
-      -90deg,
-      /* rgba(234, 245, 246, 0.642),
-      rgba(234, 245, 246, 0.642),
-      rgba(203, 240, 244, 0.642),
-      rgba(203, 240, 244, 0.642),
-      rgba(158, 231, 239, 0.642),
-      rgba(158, 231, 239, 0.642), */
-      rgba(158, 239, 158, 0.642)
-    );
+    background-color: #ADD8E6;
+    
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
   }
