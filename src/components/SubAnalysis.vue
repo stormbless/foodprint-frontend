@@ -1,12 +1,13 @@
 <template>
   <v-card
     class="subCard"
+    min-width="340"
     max-width="800"
     title="Substitution Analysis"
   >
     <v-container>
-      <v-row dense style="margin-left: 6rem;">
-        <v-col cols="4">
+      <v-row dense class="foodNamesRow">
+        <v-col cols="2" sm="4">
           <p>{{ subFoodImpact.food }}</p>
         </v-col>
         <v-col cols="2">
@@ -14,7 +15,7 @@
         </v-col>
         <v-col cols="6">
           <v-select 
-            style="width: 17em; font-weight: bold"
+            class="subCandidateSelect"
             :items="subCandidates"
             v-model="subCandidateName"
             density="compact"
@@ -26,7 +27,7 @@
         </v-col>
       </v-row>
       
-      <v-row dense class="mt-n10">
+      <v-row dense class="mt-n10 amountsRow">
         <v-col cols="5" offset="1">
           <p class="subText"> {{ subFoodImpact.amount }} g</p>
         </v-col>
@@ -291,6 +292,11 @@
     display: flex;
     align-items: center;
     margin: 1rem;
+    align-self: center;
+    width: 100%;
+  }
+  .foodNamesRow {
+    margin-left: 6rem;
   }
   .subText {
     padding-top: 1rem;
@@ -298,5 +304,27 @@
     justify-content: center;
     align-items: center;
     font-weight: normal;
+  }
+  .subCandidateSelect {
+    width: 17em; 
+    font-weight: bold;
+    font-size: small !important;
+  }
+
+  
+  @media (max-width: 600px) {
+    .foodNamesRow {
+      margin-left: 0rem;
+    }
+    p {
+      font-size: small;
+    }
+    :deep(.v-field) {
+      font-size: small !important;
+    }
+
+    .amountsRow {
+      margin-left: -6rem;
+    }
   }
 </style>

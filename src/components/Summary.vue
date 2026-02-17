@@ -33,9 +33,7 @@
       
         <td>{{ metric.name }}</td>
         <td>{{ impactSummary.grades[metric.key + "Grade" as keyof Grades] }}</td>
-        <td>{{ (impactSummary.totalImpact[metric.key as keyof Impact]).toFixed(2) }} {{ metric.unit }}
-          ({{ (impactSummary.percentageOfAvg[metric.key as keyof Impact]) }}% of avg)
-        </td>
+        <td>{{ (impactSummary.totalImpact[metric.key as keyof Impact]).toFixed(2) }} {{ metric.unit }}</td>
         <td>{{ (impactSummary.avgImpact[metric.key as keyof Impact]).toFixed(2) }} {{ metric.unit }}</td>
       </tr>
     </tbody>
@@ -103,7 +101,7 @@
           subtitle: 'as % of average',
           bar: { groupWidth: "35%" },
           height: 400,
-          width: 800,
+          // width: 800,
           legend: { position: "none" },
           vAxis: {
             title: 'Percentage Of Average Diet (%)',
@@ -157,10 +155,10 @@
     font-weight: normal;
   }
   .summaryChart {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1rem;
+    margin: auto;
+    margin-top: 1rem;
+    max-width: 800px;
+    /* height: 400px; */
   }
   .summaryTable {
     max-width: 39rem;

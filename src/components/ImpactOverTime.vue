@@ -7,18 +7,20 @@
     :options="getChartLineOptions('All metrics', 'Total Impact\n (Avg Diet Days)', 'black')"
   />
   <v-row class="mb-6" no-gutters>
-    <v-col sm="5" md="6">
+    <v-col sm="6">
       <v-card class="pa-2" outlined tile>
         <GChart
+          class="lineChart"
           type="LineChart"
           :data="emissionsOverTime"
           :options="getChartLineOptions('Emissions', 'Emissions, CO2 eq (kg)', 'red')"
         />
       </v-card>
     </v-col>
-    <v-col sm="5" md="6">
+    <v-col sm="6">
       <v-card class="pa-2" outlined tile>
-          <GChart
+        <GChart
+          class="lineChart"
           type="LineChart"
           :data="waterUseOverTime"
           :options="getChartLineOptions('Water Use', 'Water Use (L)', 'blue')"
@@ -27,18 +29,20 @@
     </v-col>
   </v-row>
   <v-row no-gutters>
-    <v-col sm="5" md="6">
+    <v-col sm="6">
       <v-card class="pa-2" outlined tile>
         <GChart
+          class="lineChart"
           type="LineChart"
           :data="landUseOverTime"
           :options="getChartLineOptions('Land Use', 'Land Use (m2)', 'green')"
         />
       </v-card>
     </v-col>
-    <v-col sm="5" md="6">
+    <v-col sm="6">
       <v-card class="pa-2" outlined tile>
         <GChart
+          class="lineChart"
           type="LineChart"
           :data="eutrophicationOverTime"
           :options="getChartLineOptions('Eutrophication', 'Eutrophication, PO4 eq (g)', 'purple')"
@@ -81,7 +85,6 @@
           resizeDebounce: "500", // waits 500 ms after resizing window to redraw chart (improves performance)
           // subtitle: "",
           chart: {},
-          width: 600,
           height: 200,
           hAxis: {
             title: "Date",
@@ -110,6 +113,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1rem;
+    margin: 1rem auto;
+    max-width: 600px;
   }
 </style>

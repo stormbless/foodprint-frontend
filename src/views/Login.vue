@@ -2,7 +2,7 @@
 <template>
   <div style="justify-content: center; align-items: center; align-self: center;">
     <v-row justify="center">
-      <v-card class="loginFormCard" elevation="2">
+      <v-card max-width="400" class="loginFormCard" elevation="2">
         <v-form
           ref="loginForm"
           v-on:keyup.enter="processLoginForm"
@@ -129,7 +129,7 @@
   padding-top: 3rem;
   height: 22rem;
   margin: 4rem;
-  width: 40%;
+  width: 100%;
 }
 .loginForm {
   display: flex;
@@ -140,9 +140,9 @@
 }
 .loginButton {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* height: 200px; */
   margin: 1rem auto;
   color: white !important;
   background-color: rgb(0, 92, 128) !important;

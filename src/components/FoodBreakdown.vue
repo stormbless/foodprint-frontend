@@ -42,7 +42,7 @@
             @click="showSubAnalysis(item.food)"
             size="small"
           >sub</v-btn></td>
-        <td>{{item.amount}}</td>
+        <td style="text-align:right">{{item.amount}}</td>
         <td :style="getImpactCellStyle(item.totalImpact)">{{item.totalImpact}}</td>
         <td :style="getImpactCellStyle(item.emissions)">{{item.emissions}}</td>
         <td :style="getImpactCellStyle(item.waterUse)">{{item.waterUse}}</td>
@@ -170,5 +170,15 @@
   .foodTable {
     max-width: 52.5rem;
     margin:auto
+  }
+  /* css adjustments for mobile */
+  @media (max-width: 600px) {
+    /* make food name col sticky on mobile */
+    td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 1000;
+      background-color: white;
+    }
   }
 </style>

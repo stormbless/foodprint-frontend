@@ -337,4 +337,9 @@
     align-items: center;
     font-weight: bold;
   }
+
+  /* css adjustments for mobile */
+  @media (max-width: 600px) {
+    h1 { font-size: x-large }
+  }
 </style>

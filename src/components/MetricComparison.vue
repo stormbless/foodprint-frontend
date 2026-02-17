@@ -1,5 +1,4 @@
 <template>
-  <!-- maybe change formatting so bars are vertically aligned? -->
   <div class="metricComparison"> 
     
     <div class="metricName">
@@ -22,9 +21,11 @@
       :barMultiplier="barMultiplier"
       style="width:15em"
     />
-    <v-icon v-if="candidateLoaded" :icon="arrowType" :color=arrowColor></v-icon>
-    <div class="metricDiff">
-      <p v-if="candidateLoaded">{{ (Math.abs(subAmount - candidateAmount)).toFixed(2) }} {{ unit }}</p>
+    <div v-if="candidateLoaded" class="metricDiffContainer">
+      <v-icon :icon="arrowType" :color=arrowColor></v-icon>
+      <div class="metricDiff">
+        <p>{{ (Math.abs(subAmount - candidateAmount)).toFixed(2) }} {{ unit }}</p>
+      </div>
     </div>
 
 
@@ -71,12 +72,17 @@ p{
   padding-bottom:0.1rem;
 }
 
+.metricDiffContainer {
+  display: flex;
+}
+
 .metricComparison {
-  display:flex; 
+  display: flex; 
   align-self: baseline;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
+
 
 .metricName {
   width: 6em;
@@ -90,6 +96,23 @@ p{
   width: 4em;
 }
 
+/* css adjustments for mobile */
+@media (max-width: 600px) {
+  /* stack metric comparisons vertically to fit on mobile */
+  .metricComparison {
+    flex-direction: column;
+    /* margin-bottom: 1rem; */
+    margin: 0.5rem auto;
+  }
+  .metricDiffContainer {
+    margin-top: 0.5rem;
+    justify-content: center;
+  }
+  /* spacer shows up when subCandidate not loaded (without negative margin, metrics too far apart) */
+  .spacer {
+    margin-bottom: -0.5rem;
+  }
+}
 
 
 </style>

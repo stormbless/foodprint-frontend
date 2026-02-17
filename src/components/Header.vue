@@ -61,6 +61,20 @@ h2 {
   font-size: large;
 }
 
+@media (max-width: 600px) {
+  h1 {
+    font-size: large;
+  }
+  h2 {
+    margin-left: 0.5rem;
+    font-size: small;
+  }
+  .button {
+    padding: 0.5rem;
+    font-size: small;
+  }
+}
+
 .appbar {
   display: flex;
   align-items: center;

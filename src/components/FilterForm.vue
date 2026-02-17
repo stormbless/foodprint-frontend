@@ -4,7 +4,7 @@
       <h2>Filter Impact Data</h2>
       <v-row justify="center" class="pa-2">
         
-        <v-col cols="2">
+        <v-col sm="4" md="3" lg="2" >
           <v-text-field
             type="date"
             v-model="startDate"
@@ -13,7 +13,7 @@
           ></v-text-field>
         </v-col>
 
-        <v-col cols="2">
+        <v-col sm="4" md="3" lg="2">
           <v-text-field
             type="date"
             v-model="endDate"
