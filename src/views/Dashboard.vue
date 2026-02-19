@@ -198,7 +198,6 @@
 
       async getDashboardData(startDate: string, endDate: string): Promise<DashboardData> {
         const res = await backend.get("/api/dashboard-data", { 
-          userEmail: store.state.userEmail, 
           startDate: startDate, 
           endDate: endDate 
         })
