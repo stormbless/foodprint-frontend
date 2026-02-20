@@ -58,9 +58,6 @@
     data() {
       return {
         startDate: "2025-12-03", 
-        startDateRules: [
-          (v: string) => !!v || "Required"
-        ], 
         endDate: "2025-12-03",
         // endDateRules in computed (can't access this.startDate if here)
         
@@ -100,7 +97,24 @@
       
     },
 
+    watch: {
+      startDate() {
+        const filterForm = this.$refs.filterForm as HTMLFormElement;
+        filterForm.validate();
+      },
+      endDate() {
+        const filterForm = this.$refs.filterForm as HTMLFormElement;
+        filterForm.validate();
+      }
+    },
+
     computed: {
+      startDateRules() {
+        return [
+          (v: string) => !!v || "Required", 
+          (v: string) => new Date(v) <= new Date(this.endDate) || "End date must not be before start date"
+        ];
+      },
       endDateRules() {
         return [
           (v: string) => !!v || "Required", 

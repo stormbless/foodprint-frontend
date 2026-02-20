@@ -184,6 +184,9 @@
           let msg = "Dashboard data failed to load";
           if (err instanceof Error && err.message === 'No Entries Available') {
             msg = err.message;
+            // hide dashboardData
+            this.resetDashboardData();
+            this.impactSummary.grades.overallGrade = '';
           }
 
           this.$toast.open({
@@ -311,6 +314,25 @@
           this.landUseOverTime.push([date, impact.landUse, AVERAGE_DIET_IMPACT.landUsePerDay]);
           this.eutrophicationOverTime.push([date, impact.eutrophication, AVERAGE_DIET_IMPACT.eutrophicationPerDay]);
         }
+      },
+
+      resetDashboardData() {
+        this.numberOfDays = 0;
+        this.impactSummary = { totalImpact: { emissions: 0, waterUse: 0, landUse: 0, eutrophication: 0, total: 0 }, 
+          avgImpact: { emissions: 0, waterUse: 0, landUse: 0, eutrophication: 0, total: 0 },
+          percentageOfAvg: { emissions: 0, waterUse: 0, landUse: 0, eutrophication: 0, total: 0 },
+          grades: { emissionsGrade: "", waterUseGrade: "", landUseGrade: "", eutrophicationGrade: "", overallGrade: "" }
+        };
+        
+        this.foodImpactsPerKg = [];
+        this.foodImpacts = [];
+        this.foodImpactsPercentage = [];
+
+        this.subActive = false,
+        this.subFoodImpact = {} as FoodImpact;
+        this.subBarMultiplier = 0;
+
+        this.resetOverTimeData();
       },
 
       showSubAnalysis(foodName: string): void {
